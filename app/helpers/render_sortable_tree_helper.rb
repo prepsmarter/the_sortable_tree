@@ -38,14 +38,15 @@ module RenderSortableTreeHelper
 
       def controls
         node = options[:node]
-
-        edit_path = h.url_for(:controller => options[:klass].pluralize, :action => :edit, :id => node)
-        destroy_path = h.url_for(:controller => options[:klass].pluralize, :action => :destroy, :id => node)
+        edit_path = h.url_for(controller: options[:klass].pluralize, action: :edit, id: node)
+        destroy_path = h.url_for(controller: options[:klass].pluralize, action: :destroy, id: node)
+        new_path = h.url_for(controller: options[:klass].pluralize, action: :new, topic: { parent_id: node })
 
         "
           <div class='controls'>
-            #{ h.link_to '', edit_path, :class => :edit }
-            #{ h.link_to '', destroy_path, :class => :delete, :method => :delete, :data => { :confirm => 'Are you sure?' } }
+            #{h.link_to '', '#', class: :new, data: { 'reveal-id': 'newTopic', parent_id: node[:topic_id] }}
+            #{h.link_to '', edit_path, class: :edit}
+            #{h.link_to '', destroy_path, class: :delete, method: :delete, data: { confirm: 'Are you sure?' }}
           </div>
         "
       end
