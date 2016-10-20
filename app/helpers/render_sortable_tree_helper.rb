@@ -7,7 +7,7 @@
 # or use h.html_escape(node.content)
 # for escape potentially dangerous content
 module RenderSortableTreeHelper
-  module Render 
+  module Render
     class << self
       attr_accessor :h, :options
 
@@ -30,22 +30,22 @@ module RenderSortableTreeHelper
       def show_link
         node = options[:node]
         ns   = options[:namespace]
-        url = h.url_for(:controller => options[:klass].pluralize, :action => :show, :id => node)
+        url = h.url_for(:controller => 'admin/' + options[:klass].pluralize, :action => :show, :id => node)
         title_field = options[:title]
 
-        "<h4>#{ h.link_to(node.send(title_field), url) }</h4>"
+        "<h4>#{ h.link_to node.send(title_field), url,  target: '_edit_topic' }</h4>"
       end
 
       def controls
         node = options[:node]
-        edit_path = h.url_for(controller: options[:klass].pluralize, action: :edit, id: node)
+        edit_path = h.url_for(controller: 'admin/' + options[:klass].pluralize, action: :edit, id: node)
         destroy_path = h.url_for(controller: options[:klass].pluralize, action: :destroy, id: node)
         new_path = h.url_for(controller: options[:klass].pluralize, action: :new, topic: { parent_id: node })
 
         "
           <div class='controls'>
             #{h.link_to '', '#', class: :new, data: { 'reveal-id': 'newTopic', parent_id: node[:topic_id] }}
-            #{h.link_to '', edit_path, class: :edit}
+            #{h.link_to '', edit_path, class: :edit, target: '_edit_topic'}
             #{h.link_to '', destroy_path, class: :delete, method: :delete, data: { confirm: 'Are you sure?' }}
           </div>
         "
