@@ -36,18 +36,19 @@ module RenderSortableTreeHelper
 
         "<h4>#{ h.link_to node.send(title_field), url,  target: '_edit_topic' }</h4>"
       end
-
       def controls
         node = options[:node]
         edit_path = h.url_for(controller: 'admin/' + options[:klass].pluralize, action: :edit, id: node)
         destroy_path = h.url_for(controller: options[:klass].pluralize, action: :destroy, id: node)
         new_path = h.url_for(controller: options[:klass].pluralize, action: :new, topic: { parent_id: node })
+        new_evoke_path = h.url_for("/admin/topics/#{node.id}/evokes")
 
         "
           <div class='controls'>
             #{h.link_to '', '#', class: :new, data: { 'reveal-id': 'newTopic', parent_id: node[:topic_id] }}
             #{h.link_to '', edit_path, class: :edit, target: '_edit_topic'}
             #{h.link_to '', destroy_path, class: :delete, method: :delete, data: { confirm: 'Are you sure?' }}
+            #{h.link_to 'Evokes', new_evoke_path, class: :new_evoke, style: 'width: auto !important;', target: '_new_evoke'}
           </div>
         "
       end
