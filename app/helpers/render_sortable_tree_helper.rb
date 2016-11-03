@@ -19,6 +19,7 @@ module RenderSortableTreeHelper
           <li data-node-id='#{ node.id }'>
             <div class='item'>
               <i class='handle'></i>
+              #{'<b class="expand minus">-</b>' unless children.blank?}
               #{ show_link }
               #{ controls }
             </div>
