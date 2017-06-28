@@ -103,6 +103,14 @@
         background: transparent image-url("iconza/icons/delete.png") no-repeat scroll center center;
         &:hover{ background: transparent image-url("iconza/icons/red_delete.png") no-repeat scroll center center; }
       }
+      &.evokes{
+        background: transparent image-url("iconza/icons/evokes.png") no-repeat scroll center center;
+        &:hover{ background: transparent image-url("iconza/icons/red_evokes.png") no-repeat scroll center center; }
+      }
+      &.references{
+        background: transparent image-url("iconza/icons/references.png") no-repeat scroll center center;
+        &:hover{ background: transparent image-url("iconza/icons/red_references.png") no-repeat scroll center center; }
+      }
     }
   }
 }

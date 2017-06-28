@@ -42,13 +42,15 @@ module RenderSortableTreeHelper
         destroy_path = h.url_for(controller: options[:klass].pluralize, action: :destroy, id: node)
         new_path = h.url_for(controller: options[:klass].pluralize, action: :new, topic: { parent_id: node })
         new_evoke_path = h.url_for("/admin/topics/#{node.id}/evokes")
+        topic_references_path = h.url_for("/topics/#{node[:topic_id]}/references")
 
         "
           <div class='controls'>
             #{h.link_to '', '#', class: :new, data: { 'reveal-id': 'newTopic', parent_id: node[:topic_id] }}
             #{h.link_to '', edit_path, class: :edit, target: '_edit_topic'}
             #{h.link_to '', destroy_path, class: :delete, method: :delete, data: { confirm: 'Are you sure?' }}
-            #{h.link_to 'Evokes', new_evoke_path, class: :new_evoke, style: 'width: auto !important;', target: '_new_evoke'}
+            #{h.link_to '', new_evoke_path, class: :evokes, target: '_evokes'}
+            #{h.link_to '', topic_references_path, class: :references, target: '_references'}
           </div>
         "
       end
