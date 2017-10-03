@@ -36,7 +36,7 @@ module RenderSortableTreeHelper
         if node.active
           if node.active_evokes_count.zero?
            "<h4>#{ h.link_to node.send(title_field), url,  target: '_edit_topic', class: "zero_evokes"}</h4>"
-          elsif node.active && node.active_evokes_count < node.parent_active_evoke_count.to_i/10
+          elsif node.active_evokes_count < node.parent_active_evoke_count.to_i/10
            "<h4>#{ h.link_to node.send(title_field), url,  target: '_edit_topic', class: "less_evokes"}</h4>"
           else
            "<h4>#{ h.link_to node.send(title_field), url,  target: '_edit_topic'}</h4>"
