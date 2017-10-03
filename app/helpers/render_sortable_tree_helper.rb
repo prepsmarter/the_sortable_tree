@@ -33,13 +33,16 @@ module RenderSortableTreeHelper
         ns   = options[:namespace]
         url = h.url_for(:controller => 'admin/' + options[:klass].pluralize, :action => :show, :id => node)
         title_field = options[:title]
-      
-        if node.active_evokes_count.zero?
-          "<h4>#{ h.link_to node.send(title_field), url,  target: '_edit_topic', class: "zero_evokes"}</h4>"
-        elsif node.active_evokes_count < node.parent_active_evoke_count.to_i/10
-          "<h4>#{ h.link_to node.send(title_field), url,  target: '_edit_topic', class: "less_evokes"}</h4>"
+        if node.active
+          if node.active_evokes_count.zero?
+           "<h4>#{ h.link_to node.send(title_field), url,  target: '_edit_topic', class: "zero_evokes"}</h4>"
+          elsif node.active_evokes_count < node.parent_active_evoke_count.to_i/10
+           "<h4>#{ h.link_to node.send(title_field), url,  target: '_edit_topic', class: "less_evokes"}</h4>"
+          else
+           "<h4>#{ h.link_to node.send(title_field), url,  target: '_edit_topic'}</h4>"
+          end
         else
-          "<h4>#{ h.link_to node.send(title_field), url,  target: '_edit_topic'}</h4>"
+         "<h4>#{ h.link_to node.send(title_field), url,  target: '_edit_topic', class: "inactive_topics"}</h4>"  
         end
       end
 
