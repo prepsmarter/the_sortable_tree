@@ -7,7 +7,7 @@
 # or use h.html_escape(node.content)
 # for escape potentially dangerous content
 module RenderExpandableTreeHelper
-  module Render 
+  module Render
     class << self
       attr_accessor :h, :options
 
@@ -18,10 +18,8 @@ module RenderExpandableTreeHelper
         "
           <li data-node-id='#{ node.id }'>
             <div class='item'>
-              <i class='handle'></i>
-              <b class='expand plus'>+</b>
+              #{'<b class="expand minus">-</b>' unless children.blank?}
               #{ show_link }
-              #{ controls }
             </div>
             #{ children }
           </li>
@@ -31,7 +29,7 @@ module RenderExpandableTreeHelper
       def show_link
         node = options[:node]
         ns   = options[:namespace]
-        url  = h.url_for(ns + [node])
+        url  = h.url_for(ns + [node]) + '/evokes'
         title_field = options[:title]
 
         "<h4>#{ h.link_to(node.send(title_field), url) }</h4>"
