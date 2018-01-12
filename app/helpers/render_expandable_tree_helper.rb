@@ -32,7 +32,7 @@ module RenderExpandableTreeHelper
         url  = h.url_for(ns + [node]) + '/evokes'
         title_field = options[:title]
 
-        "<h4>#{ h.link_to(node.send(title_field), url) }</h4>"
+        "<h4>#{ h.link_to(node.send(title_field), url, target: '_evoke') }</h4>"
       end
 
       def controls
